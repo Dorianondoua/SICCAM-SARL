@@ -1,0 +1,1702 @@
+@import "tailwindcss";
+
+/* ==========================================================================
+   SICCAM SARL — jetons du design system
+   Référence : uploads/SICCAM-design-system.md (projet Claude Design)
+   ========================================================================== */
+
+:root {
+  /* --- Brique : couleur primaire --- */
+  --brique-50: #fdf3f0;
+  --brique-100: #f9e2dc;
+  --brique-200: #f2c3b7;
+  --brique-300: #e59b87;
+  --brique-400: #d46c51;
+  --brique-500: #b8402b;
+  --brique-600: #a03623;
+  --brique-700: #822c1d;
+
+  /* --- Forêt : secondaire, agriculture --- */
+  --foret-50: #eff6f2;
+  --foret-500: #1b5e4a;
+
+  /* --- Ocre : accent --- */
+  --ocre-300: #e5b959;
+
+  /* --- Neutres chauds : aucun gris froid --- */
+  --neutre-0: #ffffff;
+  --neutre-50: #f8f5f2;
+  --neutre-100: #f0ebe6;
+  --neutre-200: #e2dad3;
+  --neutre-300: #c8bcb2;
+  --neutre-500: #7a6c62;
+  --neutre-600: #5c5049;
+  --neutre-700: #443b35;
+  --neutre-900: #1c1815;
+
+  --succes: #2e7d52;
+  --succes-fond: #e6f2eb;
+
+  /* --- Alias sémantiques --- */
+  --couleur-primaire: var(--brique-500);
+  --couleur-primaire-survol: var(--brique-600);
+  --couleur-secondaire: var(--foret-500);
+  --couleur-accent: var(--ocre-300);
+
+  --texte-titre: var(--neutre-900);
+  --texte-corps: var(--neutre-600);
+  --texte-discret: var(--neutre-500);
+  --texte-inverse: var(--neutre-0);
+  --texte-lien: var(--brique-600);
+  --texte-lien-survol: var(--brique-700);
+
+  --surface-page: var(--neutre-0);
+  --surface-douce: var(--neutre-50);
+  --surface-tiede: var(--brique-50);
+  --surface-inverse: var(--neutre-900);
+  --surface-primaire: var(--brique-500);
+
+  --bordure-discrete: var(--neutre-100);
+  --bordure: var(--neutre-200);
+
+  --voile-sombre: rgba(28, 24, 21, 0.55);
+  --voile-protection-bas: linear-gradient(
+    0deg,
+    rgba(28, 24, 21, 0.78) 0%,
+    rgba(28, 24, 21, 0.3) 50%,
+    rgba(28, 24, 21, 0) 100%
+  );
+
+  /* --- Typographie (les familles viennent de next/font, cf. _app.tsx) --- */
+  --graisse-moyenne: 500;
+  --graisse-semi: 600;
+  --graisse-grasse: 700;
+  --graisse-extra: 800;
+
+  --espacement-titre: -0.02em;
+  --espacement-display: -0.03em;
+  --espacement-surtitre: 0.14em;
+  --espacement-donnee: 0.08em;
+
+  /* --- Espacement et mise en page --- */
+  --conteneur: 1200px;
+  --conteneur-large: 1400px;
+
+  /* Barre flottante : hauteur de la pilule + son retrait par rapport au bord. */
+  --entete-hauteur: 68px;
+  --entete-marge: 16px;
+  --entete-encombrement: calc(var(--entete-hauteur) + 2 * var(--entete-marge));
+  --marge-page: clamp(20px, 4vw, 32px);
+  --section-y: clamp(64px, 8vw, 120px);
+  --section-y-compact: clamp(48px, 6vw, 80px);
+
+  /* --- Rayons --- */
+  --rayon-champ: 8px;
+  --rayon-md: 12px;
+  --rayon-carte: 16px;
+  --rayon-xl: 24px;
+  --rayon-pilule: 999px;
+
+  /* --- Élévation --- */
+  --ombre-3: 0 8px 24px rgba(28, 24, 21, 0.09), 0 2px 6px rgba(28, 24, 21, 0.05);
+  --ombre-4: 0 18px 48px rgba(28, 24, 21, 0.13), 0 4px 12px rgba(28, 24, 21, 0.06);
+  --ombre-primaire: 0 8px 20px rgba(184, 64, 43, 0.28);
+  --anneau-focus: 0 0 0 3px var(--brique-200);
+
+  /* --- Mouvement : une seule courbe --- */
+  --duree-rapide: 160ms;
+  --duree-moyenne: 240ms;
+  --courbe-standard: cubic-bezier(0.2, 0.8, 0.3, 1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --duree-rapide: 0ms;
+    --duree-moyenne: 0ms;
+  }
+}
+
+/* ==========================================================================
+   Base
+   ========================================================================== */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  /* Les ancres se calent sous la barre flottante, jamais dessous. */
+  scroll-padding-top: calc(var(--entete-encombrement) + 8px);
+}
+
+body {
+  margin: 0;
+  background: var(--surface-page);
+  color: var(--texte-corps);
+  font-size: 17px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Les variables `--police-*` sont posées par next/font sur cet élément
+   (cf. _app.tsx) : la famille se déclare donc ici, pas sur `body`. */
+.racine {
+  font-family: var(--police-texte), system-ui, sans-serif;
+}
+
+/* Les chiffres du site sont des mesures : ils s'alignent en colonne. */
+.chiffre-valeur,
+.zone-transit-valeur,
+.donnee,
+.bande,
+.etape-numero {
+  font-variant-numeric: tabular-nums;
+}
+
+a {
+  color: var(--texte-lien);
+  text-decoration: none;
+  transition: color var(--duree-rapide) var(--courbe-standard);
+}
+
+a:hover {
+  color: var(--texte-lien-survol);
+}
+
+::selection {
+  background: var(--brique-100);
+  color: var(--neutre-900);
+}
+
+:focus-visible {
+  outline: none;
+  box-shadow: var(--anneau-focus);
+  border-radius: var(--rayon-champ);
+}
+
+img {
+  max-width: 100%;
+}
+
+/* ==========================================================================
+   Primitives partagées
+   ========================================================================== */
+
+.conteneur {
+  width: 100%;
+  max-width: var(--conteneur);
+  margin: 0 auto;
+}
+
+.conteneur-large {
+  width: 100%;
+  max-width: var(--conteneur-large);
+  margin: 0 auto;
+}
+
+.section {
+  padding: var(--section-y) var(--marge-page);
+}
+
+.section-compacte {
+  padding: var(--section-y-compact) var(--marge-page);
+}
+
+.surface-douce {
+  background: var(--surface-douce);
+}
+.surface-tiede {
+  background: var(--surface-tiede);
+}
+.surface-inverse {
+  background: var(--surface-inverse);
+}
+.surface-primaire {
+  background: var(--surface-primaire);
+}
+
+/* --- Sur-titre : filet de 26 px + capitales espacées --- */
+.surtitre {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+  font-weight: var(--graisse-grasse);
+  font-size: 12px;
+  letter-spacing: var(--espacement-surtitre);
+  text-transform: uppercase;
+  color: var(--couleur-primaire);
+}
+
+.surtitre::before {
+  content: "";
+  display: block;
+  flex: 0 0 auto;
+  width: 26px;
+  height: 2px;
+  background: currentColor;
+}
+
+.surtitre-clair {
+  color: var(--brique-300);
+}
+
+/* Sur fond photo : texte blanc, filet brique clair. */
+.surtitre-hero {
+  color: var(--texte-inverse);
+}
+
+.surtitre-hero::before {
+  background: var(--brique-300);
+}
+
+.surtitre-discret {
+  color: var(--texte-discret);
+}
+
+.surtitre-discret::before {
+  background: var(--couleur-primaire);
+}
+
+/* --- Titres --- */
+.display-1,
+.titre-1,
+.titre-2,
+.titre-3,
+.titre-4 {
+  font-family: var(--police-display), system-ui, sans-serif;
+  color: var(--texte-titre);
+  margin: 0;
+  text-wrap: pretty;
+}
+
+.display-1 {
+  font-weight: var(--graisse-extra);
+  font-size: clamp(34px, 5.4vw, 76px);
+  line-height: 1.05;
+  letter-spacing: var(--espacement-display);
+}
+
+.titre-1 {
+  font-weight: var(--graisse-grasse);
+  font-size: clamp(28px, 3.6vw, 48px);
+  line-height: 1.15;
+  letter-spacing: var(--espacement-titre);
+}
+
+.titre-2 {
+  font-weight: var(--graisse-grasse);
+  font-size: clamp(26px, 3.2vw, 38px);
+  line-height: 1.15;
+  letter-spacing: var(--espacement-titre);
+}
+
+.titre-3 {
+  font-weight: var(--graisse-semi);
+  font-size: 24px;
+  line-height: 1.35;
+  letter-spacing: var(--espacement-titre);
+}
+
+.titre-4 {
+  font-weight: var(--graisse-semi);
+  font-size: 20px;
+  line-height: 1.35;
+  letter-spacing: var(--espacement-titre);
+}
+
+.chapeau {
+  margin: 14px 0 0;
+  max-width: 66ch;
+  font-size: 17px;
+  line-height: 1.6;
+  color: var(--texte-corps);
+}
+
+.texte-clair {
+  color: var(--texte-inverse);
+}
+
+.chapeau-clair {
+  color: rgba(255, 255, 255, 0.68);
+}
+
+/* --- Boutons : toujours des pilules --- */
+.bouton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 16px 30px;
+  border: 0;
+  border-radius: var(--rayon-pilule);
+  font-family: inherit;
+  font-size: 17px;
+  font-weight: var(--graisse-semi);
+  line-height: 1.2;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background var(--duree-rapide) var(--courbe-standard),
+    border-color var(--duree-rapide) var(--courbe-standard),
+    color var(--duree-rapide) var(--courbe-standard),
+    transform var(--duree-rapide) var(--courbe-standard);
+}
+
+.bouton:active {
+  transform: translateY(1px) scale(0.985);
+}
+
+.bouton-sm {
+  padding: 12px 24px;
+  font-size: 15px;
+}
+
+.bouton-md {
+  padding: 14px 28px;
+}
+
+.bouton-primaire {
+  background: var(--couleur-primaire);
+  color: var(--texte-inverse);
+  box-shadow: var(--ombre-primaire);
+}
+
+.bouton-primaire:hover {
+  background: var(--couleur-primaire-survol);
+  color: var(--texte-inverse);
+}
+
+.bouton-clair {
+  background: var(--neutre-0);
+  color: var(--neutre-900);
+}
+
+.bouton-clair:hover {
+  background: var(--surface-douce);
+  color: var(--neutre-900);
+}
+
+.bouton-sur-brique {
+  background: var(--neutre-0);
+  color: var(--couleur-primaire);
+}
+
+.bouton-sur-brique:hover {
+  background: var(--brique-50);
+  color: var(--couleur-primaire-survol);
+}
+
+.bouton-contour {
+  background: transparent;
+  border: 1px solid var(--brique-300);
+  color: var(--texte-lien);
+}
+
+.bouton-contour:hover {
+  background: var(--brique-50);
+  color: var(--texte-lien-survol);
+}
+
+/* --- Cartes --- */
+.carte {
+  background: var(--neutre-0);
+  border: 1px solid var(--bordure-discrete);
+  border-radius: var(--rayon-carte);
+  box-shadow: var(--ombre-3);
+}
+
+.carte-cliquable {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  color: inherit;
+  transition: transform var(--duree-moyenne) var(--courbe-standard),
+    box-shadow var(--duree-moyenne) var(--courbe-standard);
+}
+
+.carte-cliquable:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--ombre-4);
+  color: inherit;
+}
+
+/* --- Pastille d'icône --- */
+.pastille {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--brique-50);
+  color: var(--couleur-primaire);
+}
+
+.pastille-foret {
+  background: var(--foret-50);
+  color: var(--couleur-secondaire);
+}
+
+/* --- Grilles --- */
+.grille {
+  display: grid;
+  gap: 24px;
+}
+
+.grille-4 {
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+}
+
+.grille-3 {
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+}
+
+.grille-2 {
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: clamp(32px, 5vw, 64px);
+}
+
+/* ==========================================================================
+   Bande d'analyse — signature du site
+   Filet pleine largeur en monospace, reprenant l'en-tête d'un certificat
+   d'analyse. Porte les données réelles de la section qui suit : c'est un
+   séparateur qui informe, pas qui décore. Remplace les séparateurs ondulés.
+   ========================================================================== */
+
+.donnee {
+  font-family: var(--police-mono), ui-monospace, monospace;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: var(--espacement-donnee);
+  text-transform: uppercase;
+  line-height: 1.4;
+}
+
+.bande {
+  padding: 0 var(--marge-page);
+  background: var(--surface-page);
+}
+
+.bande-interieur {
+  position: relative;
+  max-width: var(--conteneur);
+  margin: 0 auto;
+  padding: 14px 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 32px;
+  justify-content: space-between;
+  align-items: baseline;
+  color: var(--texte-discret);
+}
+
+/* Les deux filets sont des pseudo-éléments : ce sont eux qui se tracent,
+   pas le conteneur — sinon le texte serait écrasé avec lui. */
+.bande-interieur::before,
+.bande-interieur::after,
+.bande-hero::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: var(--bordure);
+  transform-origin: left center;
+}
+
+.bande-interieur::before,
+.bande-hero::before {
+  top: 0;
+}
+
+.bande-interieur::after {
+  bottom: 0;
+}
+
+/* La première donnée de la bande est la clé : elle passe en brique. */
+.bande-interieur > :first-child {
+  color: var(--couleur-primaire);
+  font-weight: 600;
+}
+
+.bande-sombre {
+  background: var(--surface-inverse);
+}
+
+.bande-sombre .bande-interieur {
+  color: rgba(255, 255, 255, 0.55);
+}
+
+.bande-sombre .bande-interieur::before,
+.bande-sombre .bande-interieur::after {
+  background: rgba(255, 255, 255, 0.14);
+}
+
+.bande-sombre .bande-interieur > :first-child {
+  color: var(--brique-300);
+}
+
+.bande-tiede {
+  background: var(--surface-douce);
+}
+
+/* Bande posée sur la photo du héros : pas de fond, filet blanc translucide. */
+.bande-hero {
+  position: relative;
+  margin-top: 40px;
+  padding: 16px 0 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 32px;
+  justify-content: space-between;
+  align-items: baseline;
+  color: rgba(255, 255, 255, 0.72);
+}
+
+.bande-hero::before {
+  background: rgba(255, 255, 255, 0.28);
+}
+
+.bande-hero > :first-child {
+  color: var(--neutre-0);
+  font-weight: 600;
+}
+
+/* ==========================================================================
+   Barre de navigation
+   ========================================================================== */
+
+/* Barre flottante posée au-dessus du héros photo. C'est le seul endroit du
+   site où le design system autorise `backdrop-filter` — nulle part ailleurs. */
+.entete {
+  position: sticky;
+  top: 0;
+  z-index: 80;
+  padding: var(--entete-marge) var(--marge-page);
+  background: transparent;
+  pointer-events: none;
+}
+
+.entete > * {
+  pointer-events: auto;
+}
+
+/* Trois zones : logo à gauche, navigation centrée, appel à l'action à droite.
+   `1fr` au milieu tient les liens au centre optique quelle que soit la
+   largeur du logo. */
+.entete-barre {
+  min-height: var(--entete-hauteur);
+  padding: 8px 8px 8px 24px;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 24px;
+  border-radius: var(--rayon-pilule);
+  border: 1px solid var(--bordure-discrete);
+  background: var(--neutre-0);
+  box-shadow: var(--ombre-3);
+}
+
+/* Le flou reste, mais à opacité quasi pleine : sur une photo de sous-bois
+   sombre, un verre translucide vire au gris olive et salit le bandeau ocre
+   du logo. La pilule doit rester une surface propre. */
+@supports (backdrop-filter: blur(10px)) {
+  .entete-barre {
+    background: rgba(255, 255, 255, 0.94);
+    backdrop-filter: blur(12px);
+  }
+}
+
+/* ==========================================================================
+   Logo SICCAM SARL
+
+   S brique à cheval sur le bord gauche d'un bandeau ocre biseauté portant
+   « ICCAM SARL ». Toutes les cotes sont en `em` et dérivent du `font-size`
+   posé par le composant : le verrouillage est donc invariant à l'échelle.
+   Rapports repris de la maquette (S 76 / ICCAM 54 en version principale).
+   ========================================================================== */
+
+.logo {
+  display: inline-flex;
+  flex-direction: column;
+  /* `flex-start` est indispensable : sans lui, le verrouillage s'étirerait à
+     la largeur de la raison sociale (plus large) et le bandeau avec lui. */
+  align-items: flex-start;
+  /* Le bandeau déborde à droite : cette réserve évite qu'il chevauche
+     l'élément suivant dans la barre de navigation. */
+  padding-right: 0.82em;
+  font-family: var(--police-display), system-ui, sans-serif;
+  line-height: 1;
+}
+
+.logo-lockup {
+  position: relative;
+  display: block;
+  /* Largeur calée sur le lettrage : c'est elle qui définit le bloc conteneur
+     du bandeau, donc sa position et son débord. */
+  width: max-content;
+  padding: 0.19em 0;
+}
+
+.logo-bande {
+  position: absolute;
+  left: 0.4em;
+  right: -0.76em;
+  top: 0.21em;
+  bottom: 0.21em;
+  background: var(--ocre-300);
+  /* Biseau bas-droite : signature de la forme. */
+  clip-path: polygon(0 0, 100% 0, 100% 34%, calc(100% - 0.55em) 100%, 0 100%);
+}
+
+.logo-texte {
+  position: relative;
+  display: flex;
+  align-items: baseline;
+  color: var(--texte-titre);
+}
+
+.logo-s {
+  font-weight: 800;
+  font-size: 1em;
+  line-height: 0.8;
+  letter-spacing: -0.04em;
+  color: var(--couleur-primaire);
+}
+
+.logo-iccam {
+  font-weight: 800;
+  font-size: 0.71em;
+  line-height: 0.8;
+  letter-spacing: -0.02em;
+}
+
+.logo-ecart {
+  width: 0.24em;
+}
+
+.logo-sarl {
+  font-weight: 600;
+  font-size: 0.71em;
+  line-height: 0.8;
+  letter-spacing: -0.01em;
+}
+
+.logo-raison {
+  padding-left: 0.45em;
+  padding-top: 0.19em;
+  font-family: var(--police-texte), system-ui, sans-serif;
+  font-size: 0.171em;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  line-height: 1.5;
+  text-transform: uppercase;
+  color: var(--texte-corps);
+}
+
+/* --- Symbole : le S seul dans le bandeau tronqué (favicon, avatar, sac) --- */
+.logo-symbole {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1em;
+  height: 1em;
+  background: var(--ocre-300);
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 26% 100%, 0 74%);
+  font-family: var(--police-display), system-ui, sans-serif;
+}
+
+.logo-symbole-s {
+  font-weight: 800;
+  font-size: 0.66em;
+  line-height: 1;
+  letter-spacing: -0.04em;
+  color: var(--couleur-primaire);
+}
+
+/* --- Déclinaisons par fond --- */
+
+/* Fond sombre : le bandeau reste ocre, le verrouillage ne change pas. */
+.logo-sombre .logo-raison {
+  color: rgba(255, 255, 255, 0.68);
+}
+
+/* Sur brique : bandeau blanc, lettrage brique, S blanc. */
+.logo-brique .logo-bande {
+  background: var(--neutre-0);
+}
+
+.logo-brique .logo-texte {
+  color: var(--couleur-primaire);
+}
+
+.logo-brique .logo-s {
+  color: var(--neutre-0);
+}
+
+.logo-brique .logo-raison {
+  color: rgba(255, 255, 255, 0.72);
+}
+
+/* Monochrome : une seule encre. Le S fusionne avec le bandeau. */
+.logo-mono .logo-bande {
+  background: var(--neutre-900);
+}
+
+.logo-mono .logo-s {
+  color: var(--neutre-900);
+}
+
+.logo-mono .logo-texte {
+  color: var(--neutre-0);
+}
+
+.logo-mono.logo-symbole {
+  background: var(--neutre-900);
+}
+
+.logo-mono .logo-symbole-s {
+  color: var(--neutre-0);
+}
+
+.nav-large {
+  display: flex;
+  align-items: center;
+  gap: clamp(14px, 2vw, 28px);
+  justify-content: center;
+}
+
+.nav-lien {
+  font-size: 15px;
+  font-weight: var(--graisse-moyenne);
+  color: var(--neutre-700);
+  white-space: nowrap;
+}
+
+.nav-lien:hover {
+  color: var(--couleur-primaire);
+}
+
+.bouton-menu {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: var(--rayon-pilule);
+  border: 1px solid var(--bordure);
+  background: var(--neutre-0);
+  color: var(--neutre-900);
+  cursor: pointer;
+}
+
+.nav-compacte {
+  margin-top: 10px;
+  padding: 8px 24px 20px;
+  display: grid;
+  gap: 4px;
+  border-radius: var(--rayon-xl);
+  border: 1px solid var(--bordure-discrete);
+  background: var(--surface-page);
+  box-shadow: var(--ombre-4);
+}
+
+.nav-compacte a {
+  padding: 12px 0;
+  font-size: 17px;
+  font-weight: var(--graisse-moyenne);
+  color: var(--neutre-700);
+  border-bottom: 1px solid var(--bordure-discrete);
+}
+
+.nav-compacte .bouton {
+  margin-top: 12px;
+  border-bottom: 0;
+  color: var(--texte-inverse);
+}
+
+/* Colonnes assignées explicitement : sinon, quand la navigation et l'appel à
+   l'action disparaissent en dessous de 900 px, le bouton menu remonterait
+   dans la colonne du milieu au lieu de rester à droite. */
+.lien-logo {
+  grid-column: 1;
+}
+
+.nav-large {
+  grid-column: 2;
+}
+
+.nav-cta,
+.bouton-menu {
+  grid-column: 3;
+  justify-self: end;
+}
+
+@media (max-width: 899px) {
+  .nav-large,
+  .nav-cta {
+    display: none;
+  }
+  .bouton-menu {
+    display: inline-flex;
+  }
+}
+
+/* Au-delà de 899 px le panneau déroulant ne doit jamais rester visible,
+   même si l'utilisateur agrandit la fenêtre menu ouvert. */
+@media (min-width: 900px) {
+  .nav-compacte {
+    display: none;
+  }
+}
+
+/* ==========================================================================
+   Héros
+   ========================================================================== */
+
+.hero {
+  position: relative;
+  /* Remonte sous la barre flottante : la photo passe derrière la pilule.
+     Le contenu étant aligné en bas, rien n'est masqué. */
+  margin-top: calc(-1 * var(--entete-encombrement));
+  min-height: min(84vh, 720px);
+  display: flex;
+  align-items: flex-end;
+  overflow: hidden;
+}
+
+.hero-image {
+  object-fit: cover;
+}
+
+.hero-voile,
+.hero-degrade {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.hero-voile {
+  background: var(--voile-sombre);
+}
+
+.hero-degrade {
+  background: var(--voile-protection-bas);
+}
+
+.hero-contenu {
+  position: relative;
+  width: 100%;
+  max-width: var(--conteneur-large);
+  margin: 0 auto;
+  /* Le héros ayant été remonté sous la barre flottante, il faut redonner en
+     haut l'encombrement de la barre, plus l'air qui la sépare du sur-titre. */
+  padding: calc(var(--entete-encombrement) + clamp(32px, 5vw, 64px))
+    var(--marge-page) clamp(48px, 7vw, 96px);
+}
+
+.hero-texte {
+  max-width: 820px;
+}
+
+.hero-chapeau {
+  margin: 20px 0 32px;
+  max-width: 60ch;
+  font-size: 20px;
+  line-height: 1.6;
+  font-weight: 300;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+}
+
+/* ==========================================================================
+   Chiffres-clés
+   ========================================================================== */
+
+.chiffres {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 24px;
+}
+
+/* Le filet sépare deux chiffres : il n'y en a donc pas avant le premier. */
+.chiffre {
+  padding-right: 24px;
+}
+
+.chiffre + .chiffre {
+  padding-left: 24px;
+  border-left: 1px solid var(--bordure);
+}
+
+.chiffre-valeur {
+  font-family: var(--police-display), system-ui, sans-serif;
+  font-weight: var(--graisse-extra);
+  font-size: clamp(30px, 3.2vw, 48px);
+  line-height: 1.05;
+  letter-spacing: var(--espacement-display);
+  color: var(--texte-titre);
+}
+
+.chiffre-libelle {
+  margin-top: 8px;
+  font-size: 15px;
+  color: var(--texte-corps);
+}
+
+/* ==========================================================================
+   Cartes produit
+   ========================================================================== */
+
+.entete-section {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: 48px;
+}
+
+.produit-media {
+  position: relative;
+  flex: 0 0 auto;
+  aspect-ratio: 4 / 3;
+}
+
+.produit-media img {
+  object-fit: cover;
+}
+
+.produit-etiquette {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  pointer-events: none;
+  padding: 6px 14px;
+  border-radius: var(--rayon-pilule);
+  background: var(--neutre-0);
+  color: var(--neutre-900);
+  font-size: 13px;
+  font-weight: var(--graisse-semi);
+}
+
+.produit-etiquette-igp {
+  background: var(--couleur-secondaire);
+  color: var(--texte-inverse);
+}
+
+/* Colonne flexible : quelle que soit la longueur du nom ou de la description,
+   la ligne d'analyse et le lien restent alignés d'une carte à l'autre. */
+.produit-corps {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 28px;
+}
+
+.produit-origine {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: var(--graisse-moyenne);
+  color: var(--texte-discret);
+  margin-bottom: 10px;
+}
+
+.produit-origine svg {
+  color: var(--couleur-secondaire);
+}
+
+.produit-description {
+  margin: 10px 0 20px;
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--texte-corps);
+}
+
+/* Ligne d'analyse de la carte produit : la donnée du certificat, mise à part
+   du texte courant par la police utilitaire et un filet. */
+.produit-spec {
+  /* pousse le bas de carte contre le bord inférieur : c'est ce `auto` qui
+     aligne « Fiche technique » sur toutes les cartes de la grille */
+  margin-top: auto;
+  padding: 14px 0;
+  margin-bottom: 18px;
+  border-top: 1px solid var(--bordure-discrete);
+  border-bottom: 1px solid var(--bordure-discrete);
+  color: var(--texte-discret);
+  font-size: 11px;
+}
+
+.lien-fleche {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 15px;
+  font-weight: var(--graisse-semi);
+  color: var(--texte-lien);
+}
+
+.lien-fleche svg {
+  transition: transform var(--duree-rapide) var(--courbe-standard);
+}
+
+.carte-cliquable:hover .lien-fleche svg {
+  transform: translateX(3px);
+}
+
+/* ==========================================================================
+   Savoir-faire
+   ========================================================================== */
+
+/* Rupture de grille : l'image sort du conteneur jusqu'au bord de l'écran.
+   Le texte tient sur une mesure plus étroite à droite. */
+.savoir-faire {
+  overflow-x: clip;
+}
+
+.savoir-media {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 4 / 3;
+  border-radius: 0 var(--rayon-carte) var(--rayon-carte) 0;
+}
+
+@media (min-width: 1000px) {
+  .savoir-grille {
+    grid-template-columns: 1.05fr 1fr;
+  }
+
+  .savoir-media {
+    /* Déborde jusqu'au bord gauche de la fenêtre, exactement.
+       En dessous de 1264 px le conteneur est bridé par la marge de page, au
+       delà il est centré à 1200 px : `max()` couvre les deux régimes. */
+    margin-left: calc(
+      -1 * max(var(--marge-page), (100vw - var(--conteneur)) / 2)
+    );
+    aspect-ratio: auto;
+    min-height: 560px;
+  }
+}
+
+.savoir-media img {
+  object-fit: cover;
+}
+
+.points-forts {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 28px;
+  margin-top: 32px;
+}
+
+.point-fort {
+  display: flex;
+  gap: 16px;
+}
+
+.point-fort p {
+  margin: 6px 0 0;
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--texte-corps);
+}
+
+/* ==========================================================================
+   Citation
+   ========================================================================== */
+
+/* Pic typographique : le seul moment de la page où la typographie devient
+   une image. Rien d'autre à l'écran — ni photo, ni bouton, ni carte. */
+.citation {
+  background: var(--surface-douce);
+  padding: clamp(80px, 12vw, 180px) var(--marge-page);
+}
+
+.citation-interieur {
+  max-width: 1320px;
+  margin: 0 auto;
+}
+
+.citation-texte {
+  margin: 0 0 40px;
+  font-family: var(--police-display), system-ui, sans-serif;
+  font-weight: var(--graisse-extra);
+  font-size: clamp(34px, 7.2vw, 118px);
+  line-height: 1;
+  letter-spacing: -0.035em;
+  color: var(--texte-titre);
+  text-wrap: balance;
+}
+
+/* Le guillemet ouvrant déborde dans la marge : détail de composition. */
+.citation-texte::before {
+  content: "«";
+  color: var(--brique-300);
+}
+
+.citation-texte::after {
+  content: " »";
+  color: var(--brique-300);
+}
+
+/* ==========================================================================
+   Filière : procédé en six étapes, fond sombre
+   ========================================================================== */
+
+/* Le procédé est une vraie séquence : la numérotation encode l'ordre, et le
+   filet vertical continu figure l'identifiant de lot qui ne se rompt jamais. */
+.etapes {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.etape {
+  position: relative;
+  display: grid;
+  grid-template-columns: 72px minmax(140px, 200px) 1fr;
+  gap: 8px 24px;
+  align-items: baseline;
+  padding: 22px 0;
+}
+
+/* Filet de séparation en pseudo-élément, pour pouvoir être tracé. */
+.etape::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.14);
+  transform-origin: left center;
+}
+
+.etape:first-child::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.14);
+  transform-origin: left center;
+}
+
+.etape-numero {
+  color: var(--brique-300);
+  font-family: var(--police-mono), ui-monospace, monospace;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: var(--espacement-donnee);
+}
+
+.etape h3 {
+  margin: 0;
+}
+
+.etape p {
+  margin: 0;
+  max-width: 62ch;
+  font-size: 15px;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.68);
+}
+
+@media (max-width: 720px) {
+  .etape {
+    grid-template-columns: 48px 1fr;
+  }
+
+  .etape p {
+    grid-column: 2;
+  }
+}
+
+/* ==========================================================================
+   Destinations
+   ========================================================================== */
+
+.destinations {
+  display: flex;
+  flex-wrap: wrap;
+  gap: clamp(24px, 3vw, 48px);
+  align-items: flex-start;
+}
+
+.zones-onglets {
+  flex: 1 1 240px;
+  max-width: 340px;
+  display: grid;
+  gap: 2px;
+}
+
+.zone-onglet {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  width: 100%;
+  text-align: left;
+  padding: 18px 22px;
+  border-radius: var(--rayon-md);
+  border: 1px solid var(--bordure);
+  background: var(--neutre-0);
+  color: var(--neutre-700);
+  font-family: inherit;
+  cursor: pointer;
+  transition: background var(--duree-moyenne) var(--courbe-standard),
+    border-color var(--duree-moyenne) var(--courbe-standard),
+    color var(--duree-moyenne) var(--courbe-standard);
+}
+
+.zone-onglet:hover {
+  background: var(--brique-50);
+}
+
+.zone-onglet[aria-selected="true"] {
+  background: var(--brique-50);
+  border-color: var(--brique-300);
+  color: var(--texte-lien);
+}
+
+.zone-nom {
+  font-family: var(--police-display), system-ui, sans-serif;
+  font-weight: var(--graisse-semi);
+  font-size: 20px;
+  letter-spacing: var(--espacement-titre);
+}
+
+.zone-compteur {
+  font-size: 15px;
+}
+
+.zone-fiche {
+  flex: 3 1 340px;
+  min-width: 0;
+  padding: clamp(24px, 3vw, 40px);
+}
+
+.zone-fiche-entete {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding-bottom: 28px;
+  border-bottom: 1px solid var(--bordure);
+}
+
+/* Étiquette de donnée : même grammaire que les bandes d'analyse et les specs.
+   À ne pas confondre avec `.surtitre`, qui annonce une section et reste en
+   Public Sans — une étiquette mesure, un sur-titre présente. */
+.etiquette-champ {
+  font-family: var(--police-mono), ui-monospace, monospace;
+  font-weight: 500;
+  font-size: 11px;
+  letter-spacing: var(--espacement-donnee);
+  text-transform: uppercase;
+  color: var(--texte-discret);
+  margin-bottom: 8px;
+}
+
+.ports {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.port {
+  padding: 8px 16px;
+  border-radius: var(--rayon-pilule);
+  background: var(--surface-douce);
+  color: var(--neutre-700);
+  font-size: 15px;
+  font-weight: var(--graisse-moyenne);
+}
+
+.zone-transit {
+  text-align: right;
+  min-width: 150px;
+}
+
+.zone-transit-valeur {
+  font-family: var(--police-display), system-ui, sans-serif;
+  font-weight: var(--graisse-extra);
+  font-size: clamp(30px, 3.4vw, 48px);
+  line-height: 1.05;
+  letter-spacing: var(--espacement-display);
+  color: var(--couleur-primaire);
+}
+
+.zone-fiche-details {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 24px;
+  padding-top: 28px;
+}
+
+.zone-fiche-details div > div:last-child {
+  font-size: 17px;
+  color: var(--texte-titre);
+}
+
+/* ==========================================================================
+   Témoignages et références
+   ========================================================================== */
+
+.temoignage {
+  padding: 32px;
+}
+
+.etoiles {
+  display: flex;
+  gap: 4px;
+  margin-bottom: 18px;
+  color: var(--couleur-accent);
+}
+
+.temoignage p {
+  margin: 0 0 24px;
+  font-size: 17px;
+  line-height: 1.6;
+  color: var(--neutre-700);
+}
+
+.temoignage-auteur {
+  font-family: var(--police-display), system-ui, sans-serif;
+  font-weight: var(--graisse-semi);
+  font-size: 17px;
+  color: var(--texte-titre);
+}
+
+.temoignage-role {
+  font-size: 15px;
+  color: var(--texte-discret);
+}
+
+.references {
+  text-align: center;
+}
+
+.references-liste {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: clamp(24px, 5vw, 64px);
+  margin-top: 28px;
+}
+
+.references-liste span {
+  font-family: var(--police-display), system-ui, sans-serif;
+  font-weight: var(--graisse-grasse);
+  font-size: clamp(18px, 2vw, 26px);
+  letter-spacing: var(--espacement-titre);
+  color: var(--neutre-300);
+}
+
+/* ==========================================================================
+   Contact
+   ========================================================================== */
+
+.contact {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: clamp(32px, 5vw, 64px);
+  align-items: start;
+}
+
+.coordonnees {
+  display: grid;
+  gap: 24px;
+  margin-top: 40px;
+}
+
+.coordonnee {
+  display: flex;
+  gap: 16px;
+}
+
+.coordonnee-valeur {
+  display: block;
+  font-family: var(--police-display), system-ui, sans-serif;
+  font-weight: var(--graisse-semi);
+  font-size: 20px;
+  letter-spacing: var(--espacement-titre);
+  color: var(--texte-titre);
+}
+
+a.coordonnee-valeur:hover {
+  color: var(--couleur-primaire);
+}
+
+.formulaire {
+  padding: clamp(24px, 3vw, 40px);
+  box-shadow: var(--ombre-4);
+}
+
+.formulaire-grille {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+}
+
+.champ {
+  display: block;
+}
+
+.champ-libelle {
+  display: block;
+  font-size: 15px;
+  font-weight: var(--graisse-semi);
+  color: var(--texte-titre);
+  margin-bottom: 8px;
+}
+
+.champ input,
+.champ select,
+.champ textarea {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1px solid var(--bordure);
+  border-radius: var(--rayon-champ);
+  background: var(--neutre-0);
+  color: var(--texte-titre);
+  font-family: inherit;
+  font-size: 15px;
+  transition: border-color var(--duree-rapide) var(--courbe-standard),
+    box-shadow var(--duree-rapide) var(--courbe-standard);
+}
+
+.champ textarea {
+  resize: vertical;
+}
+
+/* Chevron SICCAM (tracé Lucide) à la place du chevron natif du navigateur. */
+.champ select {
+  appearance: none;
+  padding-right: 44px;
+  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='%23B8402B' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+}
+
+.champ input:focus,
+.champ select:focus,
+.champ textarea:focus {
+  outline: none;
+  border-color: var(--couleur-primaire);
+  box-shadow: var(--anneau-focus);
+}
+
+.champ-message {
+  margin-top: 20px;
+}
+
+.formulaire-pied {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-top: 28px;
+}
+
+.formulaire-mention {
+  font-size: 15px;
+  color: var(--texte-discret);
+}
+
+.confirmation {
+  text-align: center;
+  padding: 32px 8px;
+}
+
+.confirmation-pastille {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: var(--succes-fond);
+  color: var(--succes);
+  margin-bottom: 20px;
+}
+
+.confirmation p {
+  margin: 10px 0 24px;
+  font-size: 17px;
+  line-height: 1.6;
+  color: var(--texte-corps);
+}
+
+/* ==========================================================================
+   Appel à l'action et pied de page
+   ========================================================================== */
+
+/* Le bouton s'aligne sur le bas du bloc texte plutôt qu'en son milieu :
+   centré, il laissait un vide en bas à droite du bandeau. */
+.appel-action {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 28px 40px;
+}
+
+.appel-action-texte {
+  max-width: 700px;
+}
+
+.appel-action-texte p {
+  margin: 10px 0 0;
+  font-size: 17px;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.pied {
+  background: var(--surface-inverse);
+  padding: var(--section-y-compact) var(--marge-page) 32px;
+}
+
+.pied-grille {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 40px;
+  padding-bottom: 48px;
+}
+
+.pied-marque {
+  grid-column: span 2;
+  min-width: 0;
+}
+
+.pied-marque .logo {
+  margin-bottom: 24px;
+}
+
+.pied-marque p {
+  margin: 0;
+  max-width: 44ch;
+  font-size: 15px;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.68);
+}
+
+.pied-titre {
+  font-family: var(--police-display), system-ui, sans-serif;
+  font-weight: var(--graisse-semi);
+  font-size: 17px;
+  color: var(--texte-inverse);
+  margin-bottom: 16px;
+}
+
+.pied-liens {
+  display: grid;
+  gap: 10px;
+  font-size: 15px;
+  color: rgba(255, 255, 255, 0.68);
+}
+
+.pied-liens a {
+  color: rgba(255, 255, 255, 0.68);
+}
+
+.pied-liens a:hover {
+  color: var(--texte-inverse);
+}
+
+.pied-bas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  justify-content: space-between;
+  padding-top: 24px;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  font-size: 15px;
+  color: rgba(255, 255, 255, 0.45);
+}
+
+/* ==========================================================================
+   Mouvement — une seule grammaire
+
+   Arbitrage assumé : le design system interdit les apparitions au défilement,
+   et il a raison — un acheteur ne doit jamais attendre qu'un texte apparaisse.
+   L'interdiction est donc tenue sur le CONTENU, et le mouvement est déplacé
+   sur les FILETS : ils se tracent, le texte est là dès le premier pixel.
+   Rien n'est jamais invisible.
+   ========================================================================== */
+
+@keyframes tracer-filet {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+@keyframes entree-hero {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Les filets des bandes d'analyse se tracent à l'entrée dans le champ.
+   Sous @supports : sans `animation-timeline`, le filet reste simplement
+   affiché — il n'est jamais masqué en attendant un support absent. */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .bande-interieur::before,
+    .bande-interieur::after,
+    .bande-hero::before,
+    .etape::after,
+    .etape:first-child::before {
+      animation: tracer-filet linear both;
+      animation-timeline: view();
+      animation-range: entry 5% entry 55%;
+    }
+  }
+}
+
+/* Séquence d'ouverture — héros uniquement, une fois, au chargement. */
+@media (prefers-reduced-motion: no-preference) {
+  .hero-texte > * {
+    animation: entree-hero 620ms var(--courbe-standard) backwards;
+  }
+
+  .hero-texte > :nth-child(1) {
+    animation-delay: 60ms;
+  }
+  .hero-texte > :nth-child(2) {
+    animation-delay: 140ms;
+  }
+  .hero-texte > :nth-child(3) {
+    animation-delay: 220ms;
+  }
+  .hero-texte > :nth-child(4) {
+    animation-delay: 300ms;
+  }
+  .hero-texte > :nth-child(5) {
+    animation-delay: 380ms;
+  }
+}

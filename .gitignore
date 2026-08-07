@@ -1,0 +1,49 @@
+# Dépendances
+node_modules/
+.pnp
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/versions
+
+# Build Next.js
+.next/
+out/
+build/
+
+# Variables d'environnement
+.env
+.env.*
+
+# TypeScript
+*.tsbuildinfo
+next-env.d.ts
+
+# Journaux
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# Système et éditeurs
+.DS_Store
+Thumbs.db
+# fichiers de verrouillage Word / Excel
+~$*
+*.pem
+.vercel
+.idea/
+.vscode/
+
+# Ancien dépôt controle-money, neutralisé lors de la reprise du dossier.
+# Son historique reste disponible sur github.com/Dorianondoua/controle-money
+front-endsod/.git.controle-money/
+
+# Documents hérités du projet WealthFlow / Sira, sans rapport avec SICCAM.
+# À supprimer du disque une fois confirmé qu'ils ne servent plus.
+front-endsod/README.md
+front-endsod/DEPLOIEMENT.md
+front-endsod/plan_developpement.md
+front-endsod/.env.example
