@@ -39,11 +39,4 @@ Thumbs.db
 
 # Ancien dépôt controle-money, neutralisé lors de la reprise du dossier.
 # Son historique reste disponible sur github.com/Dorianondoua/controle-money
-front-endsod/.git.controle-money/
-
-# Documents hérités du projet WealthFlow / Sira, sans rapport avec SICCAM.
-# À supprimer du disque une fois confirmé qu'ils ne servent plus.
-front-endsod/README.md
-front-endsod/DEPLOIEMENT.md
-front-endsod/plan_developpement.md
-front-endsod/.env.example
+.git.controle-money/

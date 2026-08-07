@@ -9,7 +9,6 @@ desservies au départ de Douala et Kribi, et recueille les demandes de devis.
 ## Démarrer
 
 ```bash
-cd front-endsod
 npm install
 npm run dev
 ```
@@ -21,6 +20,12 @@ Le site est servi sur `http://localhost:3000`.
 | `npm run dev` | Serveur de développement |
 | `npm run build` | Build de production |
 | `npm run start` | Sert le build de production |
+| `npm run lint` | Analyse statique |
+
+## Déploiement
+
+L'application est à la racine du dépôt : Vercel la détecte sans configuration.
+Le réglage **Root Directory** doit rester à `./`.
 
 ## Socle technique
 
@@ -35,18 +40,17 @@ Le site est servi sur `http://localhost:3000`.
 ## Organisation
 
 ```
-front-endsod/
-├── src/
-│   ├── pages/            index, _app (polices), _document
-│   ├── styles/           globals.css — jetons et styles
-│   ├── data/siccam.ts    contenu éditorial : produits, zones, étapes, coordonnées
-│   └── components/
-│       ├── Logo.tsx      logo paramétrable, 3 variantes × 4 fonds
-│       ├── Bande.tsx     bandes d'analyse (séparateurs porteurs de données)
-│       ├── Icone.tsx     jeu d'icônes Lucide inline
-│       └── sections/     une section de page par fichier
-└── public/images/accueil/
-images/                   visuels sources, par page
+src/
+├── pages/                index, _app (polices), _document
+├── styles/               globals.css — jetons et styles
+├── data/siccam.ts        contenu éditorial : produits, zones, étapes, coordonnées
+└── components/
+    ├── Logo.tsx          logo paramétrable, 3 variantes × 4 fonds
+    ├── Bande.tsx         bandes d'analyse (séparateurs porteurs de données)
+    ├── Icone.tsx         jeu d'icônes Lucide inline
+    └── sections/         une section de page par fichier
+public/images/accueil/    visuels servis par le site
+images/                   visuels sources, classés par page
 ```
 
 Le contenu éditorial est isolé dans `src/data/siccam.ts` : modifier un chiffre, une
@@ -90,7 +94,6 @@ Livré :
 - [ ] **Valider les chiffres et témoignages** publiés, repris de la maquette et non vérifiés.
 - [ ] Réaliser les pages Produits et À propos.
 - [ ] Vectoriser le S du favicon.
-- [ ] Corriger la configuration ESLint, incompatible avec sa version.
 
 ## Documentation
 
