@@ -16,6 +16,8 @@ build/
 # Variables d'environnement
 .env
 .env.*
+# ...sauf le gabarit, qui documente les variables attendues sans secret.
+!.env.example
 
 # TypeScript
 *.tsbuildinfo
@@ -26,6 +28,12 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 .pnpm-debug.log*
+
+# Documents commerciaux : facture, devis. Ils portent des coordonnées
+# personnelles et des modalités de règlement, qui n'ont rien à faire dans un
+# dépôt de code — a fortiori s'il devient public un jour.
+Facture*.docx
+Devis*.docx
 
 # Système et éditeurs
 .DS_Store

@@ -42,7 +42,11 @@ export function Destinations() {
             ))}
           </div>
 
+          {/* La `key` change avec la zone : React remonte la fiche, ce qui
+              rejoue l'animation de bascule. Sans elle, le contenu serait
+              remplacé sans qu'aucun mouvement ne le signale. */}
           <div
+            key={zone.id}
             id="fiche-zone"
             role="tabpanel"
             aria-labelledby={`onglet-${zone.id}`}
@@ -74,10 +78,8 @@ export function Destinations() {
                 <div className="etiquette-champ">Produits expédiés</div>
                 <div>{zone.produits}</div>
               </div>
-              <div>
-                <div className="etiquette-champ">Volume minimum</div>
-                <div>1 conteneur 20 pieds</div>
-              </div>
+              {/* Le volume minimum a été retiré le 10 août 2026 : SICCAM
+                  n'impose pas de plancher de commande. */}
             </div>
           </div>
         </div>

@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import { Icone } from "@/components/Icone";
 import { PRODUITS } from "@/data/siccam";
 
@@ -13,14 +14,14 @@ export function Produits() {
               Quatre filières, une même exigence de tri.
             </h2>
             <p className="chapeau">
-              Fiches techniques, échantillons et certificats d&apos;analyse
-              disponibles sur demande.
+              Nos quatre filières d&apos;export. Le catalogue complet couvre
+              vingt et une références, locales et importées.
             </p>
           </div>
-          <a href="#contact" className="bouton bouton-md bouton-contour">
-            Demander le catalogue
+          <Link href="/produits" className="bouton bouton-md bouton-contour">
+            Voir tout le catalogue
             <Icone name="fleche-droite" size={18} />
-          </a>
+          </Link>
         </div>
 
         <div className="grille grille-4">

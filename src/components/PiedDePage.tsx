@@ -1,7 +1,11 @@
+import Link from "next/link";
+import { useRouter } from "next/router";
 import { Logo } from "@/components/Logo";
-import { CONTACT, PRODUITS, versTel } from "@/data/siccam";
+import { CONTACT, FAMILLES, versAncre, versTel } from "@/data/siccam";
 
 export function PiedDePage() {
+  const surAccueil = useRouter().pathname === "/";
+
   return (
     <footer className="pied">
       <div className="conteneur">
@@ -20,21 +24,30 @@ export function PiedDePage() {
           <div>
             <div className="pied-titre">Produits</div>
             <div className="pied-liens">
-              {PRODUITS.map((produit) => (
-                <a key={produit.id} href="#produits">
-                  {produit.nom}
-                </a>
+              <Link href="/produits">Catalogue complet</Link>
+              {FAMILLES.map((famille) => (
+                <Link key={famille.id} href={`/produits#${famille.id}`}>
+                  {famille.nom}
+                </Link>
               ))}
+              <Link href="/produits#bureau">Fournitures de bureau</Link>
             </div>
           </div>
 
           <div>
             <div className="pied-titre">Société</div>
             <div className="pied-liens">
-              <a href="#savoir-faire">Savoir-faire</a>
-              <a href="#filiere">Notre procédé</a>
-              <a href="#destinations">Destinations</a>
-              <a href="#references">Références</a>
+              <Link href={versAncre("#activites", surAccueil)}>Activités</Link>
+              <Link href={versAncre("#savoir-faire", surAccueil)}>
+                Savoir-faire
+              </Link>
+              <Link href={versAncre("#filiere", surAccueil)}>
+                Notre procédé
+              </Link>
+              <Link href={versAncre("#destinations", surAccueil)}>
+                Destinations
+              </Link>
+              <Link href={versAncre("#contact", surAccueil)}>Contact</Link>
             </div>
           </div>
 

@@ -1259,7 +1259,8 @@ img {
   cursor: pointer;
   transition: background var(--duree-moyenne) var(--courbe-standard),
     border-color var(--duree-moyenne) var(--courbe-standard),
-    color var(--duree-moyenne) var(--courbe-standard);
+    color var(--duree-moyenne) var(--courbe-standard),
+    padding-left var(--duree-rapide) var(--courbe-standard);
 }
 
 .zone-onglet:hover {
@@ -1543,6 +1544,59 @@ a.coordonnee-valeur:hover {
   color: var(--texte-corps);
 }
 
+/* --- Échec d'envoi ---
+   Même gabarit que la confirmation, pastille en brique : l'écran d'échec doit
+   se lire comme un état du formulaire, pas comme une page d'erreur. */
+.confirmation-pastille-echec {
+  background: var(--brique-50);
+  color: var(--couleur-primaire);
+}
+
+.formulaire-secours {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+}
+
+.confirmation .formulaire-mention {
+  margin-top: 18px;
+}
+
+/* Le champ piège doit être invisible sans être `display: none` : certains
+   robots ignorent les champs non rendus. Il est aussi sorti du flux de
+   tabulation et masqué aux lecteurs d'écran côté composant. */
+.piege {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+.formulaire-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.champ-erreur {
+  margin-top: 6px;
+  font-size: 13px;
+  color: var(--couleur-primaire);
+}
+
+.champ input[aria-invalid="true"],
+.champ select[aria-invalid="true"],
+.champ textarea[aria-invalid="true"] {
+  border-color: var(--couleur-primaire);
+}
+
+.bouton:disabled {
+  opacity: 0.6;
+  cursor: progress;
+}
+
 /* ==========================================================================
    Appel à l'action et pied de page
    ========================================================================== */
@@ -1632,6 +1686,168 @@ a.coordonnee-valeur:hover {
 }
 
 /* ==========================================================================
+   Domaines d'intervention — relevé numéroté
+
+   Ni cartes ni pastilles d'icône : le jeu d'icônes du site ne couvre pas ces
+   sept intitulés, et une icône approximative vaut moins que pas d'icône. Le
+   numéro en monospace suffit à donner le rythme.
+   ========================================================================== */
+
+.activites {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 0;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid var(--bordure);
+}
+
+/* Le filet du bas est un pseudo-élément et non une bordure : une bordure ne
+   se trace pas, un pseudo-élément se met à l'échelle. Même dispositif que les
+   étapes du procédé. */
+.activite {
+  position: relative;
+  display: flex;
+  align-items: baseline;
+  gap: 16px;
+  padding: 22px 24px 22px 0;
+}
+
+.activite::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 1px;
+  background: var(--bordure);
+  transform-origin: left center;
+}
+
+.activite-index {
+  flex: 0 0 auto;
+  font-size: 12px;
+  color: var(--couleur-primaire);
+}
+
+.activite-nom {
+  font-family: var(--police-display), system-ui, sans-serif;
+  font-weight: var(--graisse-semi);
+  font-size: clamp(17px, 1.6vw, 20px);
+  line-height: 1.3;
+  color: var(--texte-titre);
+}
+
+/* ==========================================================================
+   Page catalogue — /produits
+   ========================================================================== */
+
+/* Héros de page intérieure : même grammaire que le héros d'accueil, mais
+   deux fois moins haut — la page doit livrer la grille produit tout de suite. */
+.hero-page {
+  min-height: min(52vh, 440px);
+}
+
+.hero-page .hero-contenu {
+  padding-bottom: clamp(36px, 4.5vw, 56px);
+}
+
+/* Renvois vers les deux familles, posés sur la photo du héros. */
+.familles-liens {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 28px;
+}
+
+.famille-lien {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 18px;
+  border-radius: var(--rayon-pilule);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--texte-inverse);
+  font-size: 15px;
+  font-weight: var(--graisse-semi);
+  transition: background var(--duree-rapide) var(--courbe-standard),
+    border-color var(--duree-rapide) var(--courbe-standard);
+}
+
+.famille-lien:hover {
+  background: rgba(255, 255, 255, 0.18);
+  border-color: rgba(255, 255, 255, 0.55);
+  color: var(--texte-inverse);
+}
+
+.famille-lien-compte {
+  font-family: var(--police-mono), ui-monospace, monospace;
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  color: rgba(255, 255, 255, 0.62);
+}
+
+/* --- Commerce général : fournitures de bureau --- */
+
+.bureau-media {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 4 / 3;
+  border-radius: var(--rayon-carte);
+}
+
+.bureau-media img {
+  object-fit: cover;
+}
+
+.bureau-intro {
+  margin-bottom: clamp(40px, 5vw, 64px);
+}
+
+.bureau-intro .bouton {
+  margin-top: 8px;
+}
+
+/* Cinq rubriques, pas cinq références : le corps de carte se limite au nom et
+   à trois exemples. Ni ligne d'analyse ni lien « fiche technique » — on ne
+   certifie pas un cahier comme un lot de cacao. */
+.fourniture-corps {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 22px 24px 24px;
+}
+
+.fourniture-exemples {
+  margin: 0;
+  font-size: 11px;
+  color: var(--texte-discret);
+}
+
+/* Ligne d'analyse en attente : le produit n'a pas encore de spécification
+   validée. Volontairement plus pâle que les vraies lignes — l'œil doit
+   distinguer une donnée publiée d'une donnée à demander. */
+.produit-spec-vide {
+  color: var(--neutre-300);
+}
+
+/* La section importée passe en fond doux : l'alternance de surface sépare les
+   deux familles sans ajouter de filet supplémentaire. */
+.famille-compte {
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 1px solid var(--bordure);
+  color: var(--texte-discret);
+}
+
+/* Le titre de famille doit rester atteignable sous la barre collante. */
+.famille[id] {
+  scroll-margin-top: calc(var(--entete-encombrement) + 16px);
+}
+
+/* ==========================================================================
    Mouvement — une seule grammaire
 
    Arbitrage assumé : le design system interdit les apparitions au défilement,
@@ -1661,6 +1877,51 @@ a.coordonnee-valeur:hover {
   }
 }
 
+/* Bascule de fiche de destination : la fiche change de contenu sans changer de
+   position. Sans repère visuel, un clic sur un onglet peut passer inaperçu —
+   surtout si deux zones partagent des incoterms. Douze pixels et 240 ms
+   suffisent à signaler « ceci vient d'être remplacé ». */
+@keyframes bascule-fiche {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* --- Survol : la photo respire à l'intérieur de son cadre ---
+   L'agrandissement reste sous le rayon de la carte grâce à l'`overflow:
+   hidden` de `.carte-cliquable`. 1,04 est délibérément faible : au-delà, le
+   sujet sort du cadrage et la carte fait vitrine de supermarché. */
+.produit-media img {
+  transition: transform 520ms var(--courbe-standard);
+}
+
+.carte-cliquable:hover .produit-media img {
+  transform: scale(1.04);
+}
+
+/* La flèche d'un bouton avance au survol, comme celle des cartes produit :
+   même geste, même distance, une seule grammaire dans tout le site. */
+.bouton svg,
+.famille-lien svg {
+  transition: transform var(--duree-rapide) var(--courbe-standard);
+}
+
+.bouton:hover svg,
+.famille-lien:hover svg {
+  transform: translateX(3px);
+}
+
+/* Le survol d'un onglet de zone décale son libellé : l'onglet actif, lui, ne
+   bouge jamais — c'est un état, pas une invitation. */
+.zone-onglet:hover:not([aria-selected="true"]) {
+  padding-left: 26px;
+}
+
 /* Les filets des bandes d'analyse se tracent à l'entrée dans le champ.
    Sous @supports : sans `animation-timeline`, le filet reste simplement
    affiché — il n'est jamais masqué en attendant un support absent. */
@@ -1670,11 +1931,18 @@ a.coordonnee-valeur:hover {
     .bande-interieur::after,
     .bande-hero::before,
     .etape::after,
-    .etape:first-child::before {
+    .etape:first-child::before,
+    .activite::after {
       animation: tracer-filet linear both;
       animation-timeline: view();
       animation-range: entry 5% entry 55%;
     }
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .zone-fiche {
+    animation: bascule-fiche var(--duree-moyenne) var(--courbe-standard);
   }
 }
 

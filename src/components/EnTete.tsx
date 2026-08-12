@@ -1,7 +1,9 @@
 import { useState } from "react";
+import Link from "next/link";
+import { useRouter } from "next/router";
 import { Icone } from "@/components/Icone";
 import { Logo } from "@/components/Logo";
-import { NAVIGATION } from "@/data/siccam";
+import { NAVIGATION, versAncre } from "@/data/siccam";
 
 /**
  * Barre de navigation collante, hauteur 76 px — seul élément fixe de la page.
@@ -9,26 +11,39 @@ import { NAVIGATION } from "@/data/siccam";
  */
 export function EnTete() {
   const [ouvert, setOuvert] = useState(false);
+  // Les liens de sections sont des ancres : hors accueil, il faut les préfixer.
+  const surAccueil = useRouter().pathname === "/";
 
   return (
     <header className="entete">
       <div className="conteneur-large entete-barre">
-        <a href="#hero" className="lien-logo" aria-label="SICCAM SARL — accueil">
+        <Link
+          href={surAccueil ? "#hero" : "/"}
+          className="lien-logo"
+          aria-label="SICCAM SARL — accueil"
+        >
           <Logo variante="court" taille={34} />
-        </a>
+        </Link>
 
         <nav className="nav-large" aria-label="Navigation principale">
           {NAVIGATION.map((lien) => (
-            <a key={lien.href} href={lien.href} className="nav-lien">
+            <Link
+              key={lien.href}
+              href={versAncre(lien.href, surAccueil)}
+              className="nav-lien"
+            >
               {lien.libelle}
-            </a>
+            </Link>
           ))}
         </nav>
 
-        <a href="#contact" className="bouton bouton-sm bouton-primaire nav-cta">
+        <Link
+          href={versAncre("#contact", surAccueil)}
+          className="bouton bouton-sm bouton-primaire nav-cta"
+        >
           Demander un devis
           <Icone name="fleche-droite" size={18} />
-        </a>
+        </Link>
 
         <button
           type="button"
@@ -49,18 +64,22 @@ export function EnTete() {
           aria-label="Navigation principale"
         >
           {NAVIGATION.map((lien) => (
-            <a key={lien.href} href={lien.href} onClick={() => setOuvert(false)}>
+            <Link
+              key={lien.href}
+              href={versAncre(lien.href, surAccueil)}
+              onClick={() => setOuvert(false)}
+            >
               {lien.libelle}
-            </a>
+            </Link>
           ))}
-          <a
-            href="#contact"
+          <Link
+            href={versAncre("#contact", surAccueil)}
             className="bouton bouton-primaire"
             onClick={() => setOuvert(false)}
           >
             Demander un devis
             <Icone name="fleche-droite" size={18} />
-          </a>
+          </Link>
         </nav>
       ) : null}
     </header>

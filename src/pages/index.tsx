@@ -2,11 +2,11 @@ import Head from "next/head";
 import { EnTete } from "@/components/EnTete";
 import { PiedDePage } from "@/components/PiedDePage";
 import { Chiffres, Hero } from "@/components/sections/Hero";
+import { Activites } from "@/components/sections/Activites";
 import { Produits } from "@/components/sections/Produits";
 import { Citation, SavoirFaire } from "@/components/sections/SavoirFaire";
 import { Filiere } from "@/components/sections/Filiere";
 import { Destinations } from "@/components/sections/Destinations";
-import { References, Temoignages } from "@/components/sections/Temoignages";
 import { AppelAction, Contact } from "@/components/sections/Contact";
 import { Bande } from "@/components/Bande";
 import {
@@ -45,6 +45,10 @@ export default function Accueil() {
         <Hero />
         <Chiffres />
 
+        {/* Ce que fait l'entreprise, avant de montrer ce qu'elle vend : les
+            sept domaines de l'en-tête officiel. */}
+        <Activites />
+
         {/* Les bandes d'analyse remplacent les séparateurs ondulés : chacune
             porte les données réelles de la section qu'elle introduit. */}
         <Bande donnees={BANDE_PRODUITS} />
@@ -59,8 +63,8 @@ export default function Accueil() {
         <Bande donnees={BANDE_DESTINATIONS} />
         <Destinations />
 
-        <Temoignages />
-        <References />
+        {/* Témoignages et références sectorielles retirés : aucun des deux
+            n'était vérifiable. Voir le commentaire dans src/data/siccam.ts. */}
         <Contact />
         <AppelAction />
       </main>
