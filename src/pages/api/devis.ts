@@ -16,6 +16,15 @@ import nodemailer from "nodemailer";
  * de mentir au visiteur.
  */
 
+/**
+ * Vercel coupe une fonction serverless à 10 secondes par défaut. Les serveurs
+ * SMTP de Yahoo répondent en 8 à 12 secondes en temps normal, et jusqu'à 30
+ * quand ils sont chargés : au tarif par défaut, une demande sur deux serait
+ * perdue. Trente secondes couvrent les pics observés sans immobiliser une
+ * fonction indéfiniment. Sans effet en développement local.
+ */
+export const config = { maxDuration: 30 };
+
 const LIMITES = {
   nom: 120,
   societe: 160,
