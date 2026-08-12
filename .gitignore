@@ -34,6 +34,7 @@ yarn-error.log*
 # dépôt de code — a fortiori s'il devient public un jour.
 Facture*.docx
 Devis*.docx
+Contrat*.docx
 
 # Système et éditeurs
 .DS_Store
