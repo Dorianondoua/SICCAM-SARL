@@ -13,6 +13,8 @@ import {
   BANDE_DESTINATIONS,
   BANDE_FILIERE,
   BANDE_PRODUITS,
+  CONTACT,
+  SITE_URL,
 } from "@/data/siccam";
 
 export default function Accueil() {
@@ -35,8 +37,48 @@ export default function Accueil() {
           property="og:description"
           content="Cacao, café, soja grain et poivre blanc de Penja. Chaque lot est collecté auprès de producteurs identifiés, trié puis contrôlé avant départ de Douala."
         />
-        <meta property="og:image" content="/images/accueil/hero.webp" />
+        {/* Adresses absolues obligatoires : Google, WhatsApp et LinkedIn
+            ignorent un chemin relatif dans og:image. */}
+        <meta property="og:image" content={`${SITE_URL}/images/accueil/hero.webp`} />
+        <meta property="og:url" content={SITE_URL} />
+        <meta property="og:site_name" content="SICCAM SARL" />
         <meta property="og:locale" content="fr_FR" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <link rel="canonical" href={SITE_URL} />
+
+        {/*
+          Données structurées. Elles disent explicitement à Google qu'il a
+          affaire à une entreprise identifiée, avec une adresse et des
+          coordonnées — plutôt que de le laisser le déduire du texte. C'est ce
+          qui permet à une recherche sur « SICCAM SARL » d'afficher un panneau
+          de connaissance plutôt qu'un simple lien bleu.
+        */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Organization",
+              name: "SICCAM SARL",
+              legalName:
+                "Société Industrielle et Commerciale du Cameroun SARL",
+              url: SITE_URL,
+              logo: `${SITE_URL}/favicon.svg`,
+              image: `${SITE_URL}/images/accueil/hero.webp`,
+              description:
+                "Production, commercialisation, distribution et exportation de produits agricoles, agroalimentaires et agro-pastoraux depuis le Cameroun.",
+              address: {
+                "@type": "PostalAddress",
+                streetAddress: "Olembé",
+                addressLocality: "Yaoundé",
+                addressCountry: "CM",
+              },
+              telephone: CONTACT.telephones,
+              email: CONTACT.courriel,
+              areaServed: ["Afrique", "Europe", "Asie", "Moyen-Orient"],
+            }),
+          }}
+        />
       </Head>
 
       <EnTete />

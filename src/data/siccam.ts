@@ -1,5 +1,19 @@
 import type { NomIcone } from "@/components/Icone";
 
+/**
+ * Adresse publique du site, sans barre oblique finale.
+ *
+ * Elle sert aux URL canoniques, au plan de site et aux métadonnées de partage,
+ * qui exigent toutes des adresses absolues : un chemin relatif dans une balise
+ * `og:image` n'est exploité ni par Google, ni par WhatsApp, ni par LinkedIn.
+ *
+ * À déclarer chez l'hébergeur sous NEXT_PUBLIC_SITE_URL, et à mettre à jour le
+ * jour du basculement sur le nom de domaine définitif.
+ */
+export const SITE_URL = (
+  process.env.NEXT_PUBLIC_SITE_URL ?? "https://siccam-sarl.vercel.app"
+).replace(/\/$/, "");
+
 /** Coordonnées de l'entreprise. */
 export const CONTACT = {
   telephones: ["+237 690 498 465", "+237 622 548 649"],

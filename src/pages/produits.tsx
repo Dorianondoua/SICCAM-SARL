@@ -7,7 +7,12 @@ import { Icone } from "@/components/Icone";
 import { Catalogue } from "@/components/sections/Catalogue";
 import { CommerceGeneral } from "@/components/sections/CommerceGeneral";
 import { AppelAction, Contact } from "@/components/sections/Contact";
-import { BANDE_CATALOGUE, FAMILLES, FOURNITURES } from "@/data/siccam";
+import {
+  BANDE_CATALOGUE,
+  FAMILLES,
+  FOURNITURES,
+  SITE_URL,
+} from "@/data/siccam";
 
 export default function PageProduits() {
   return (
@@ -29,6 +34,15 @@ export default function PageProduits() {
           property="og:description"
           content="Produits locaux du terroir camerounais et denrées importées. Spécifications et échantillons sur demande."
         />
+        <meta
+          property="og:image"
+          content={`${SITE_URL}/images/produits/locaux/cacao.webp`}
+        />
+        <meta property="og:url" content={`${SITE_URL}/produits`} />
+        <meta property="og:site_name" content="SICCAM SARL" />
+        <meta property="og:locale" content="fr_FR" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <link rel="canonical" href={`${SITE_URL}/produits`} />
         <meta property="og:image" content="/images/produits/locaux/cacao.webp" />
         <meta property="og:locale" content="fr_FR" />
       </Head>
