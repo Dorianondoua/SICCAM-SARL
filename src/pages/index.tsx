@@ -35,7 +35,7 @@ export default function Accueil() {
           property="og:description"
           content="Cacao, café, soja grain et poivre blanc de Penja. Chaque lot est collecté auprès de producteurs identifiés, trié puis contrôlé avant départ de Douala."
         />
-        <meta property="og:image" content="/images/accueil/hero.png" />
+        <meta property="og:image" content="/images/accueil/hero.webp" />
         <meta property="og:locale" content="fr_FR" />
       </Head>
 

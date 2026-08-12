@@ -76,7 +76,7 @@ export const PRODUITS: Produit[] = [
     description:
       "Fèves fermentées six jours, séchées au soleil. Humidité ≤ 7,5 %, grainage 95 à 105 fèves aux 100 g.",
     spec: "HUM. ≤ 7,5 % · 95–105 FÈVES/100 G",
-    image: "/images/accueil/cacao.png",
+    image: "/images/accueil/cacao.webp",
     alt: "Fèves de cacao en cours de séchage sur claies de bois",
   },
   {
@@ -88,7 +88,7 @@ export const PRODUITS: Produit[] = [
       "Arabica lavé d'altitude et robusta du Moungo, triés densimétriquement. Humidité 10 à 12 %.",
     // La pastille porte déjà « Screen 15+ » : la ligne d'analyse ne la répète pas.
     spec: "HUM. 10–12 % · ARABICA & ROBUSTA",
-    image: "/images/accueil/cafe.png",
+    image: "/images/accueil/cafe.webp",
     alt: "Sacs de jute remplis de café vert dans un entrepôt",
   },
   {
@@ -99,7 +99,7 @@ export const PRODUITS: Produit[] = [
     description:
       "Variétés conventionnelles pour trituration et alimentation animale. Protéines ≥ 36 %, impuretés ≤ 2 %.",
     spec: "PROT. ≥ 36 % · IMPUR. ≤ 2 %",
-    image: "/images/accueil/soja.png",
+    image: "/images/accueil/soja.webp",
     alt: "Grains de soja en tas dans une caisse de tri",
   },
   {
@@ -112,7 +112,7 @@ export const PRODUITS: Produit[] = [
       "Indication géographique protégée. Sols volcaniques, rouissage puis séchage. Calibre 4 à 5 mm.",
     // La pastille porte déjà « IGP » : la ligne d'analyse ne la répète pas.
     spec: "CALIBRE 4–5 MM · VALLÉE DU MOUNGO",
-    image: "/images/accueil/poivre.png",
+    image: "/images/accueil/poivre.webp",
     alt: "Grains de poivre blanc de Penja dans un panier tressé",
   },
 ];
@@ -147,7 +147,7 @@ export const PRODUITS_LOCAUX: Produit[] = [
     description:
       "Fèves fermentées six jours, séchées au soleil. Humidité ≤ 7,5 %, grainage 95 à 105 fèves aux 100 g.",
     spec: "HUM. ≤ 7,5 % · 95–105 FÈVES/100 G",
-    image: "/images/produits/locaux/cacao.png",
+    image: "/images/produits/locaux/cacao.webp",
     alt: "Fèves de cacao en cours de séchage sur claies de bois",
   },
   {
@@ -158,7 +158,7 @@ export const PRODUITS_LOCAUX: Produit[] = [
     description:
       "Arabica lavé d'altitude et robusta du Moungo, triés densimétriquement. Humidité 10 à 12 %.",
     spec: "HUM. 10–12 % · ARABICA & ROBUSTA",
-    image: "/images/produits/locaux/cafe.png",
+    image: "/images/produits/locaux/cafe.webp",
     alt: "Sacs de jute remplis de café vert dans un entrepôt",
   },
   {
@@ -170,7 +170,7 @@ export const PRODUITS_LOCAUX: Produit[] = [
     description:
       "Indication géographique protégée. Sols volcaniques, rouissage puis séchage. Calibre 4 à 5 mm.",
     spec: "CALIBRE 4–5 MM · VALLÉE DU MOUNGO",
-    image: "/images/produits/locaux/poivre.png",
+    image: "/images/produits/locaux/poivre.webp",
     alt: "Grains de poivre blanc de Penja dans un panier tressé",
   },
   {
@@ -181,7 +181,7 @@ export const PRODUITS_LOCAUX: Produit[] = [
     description:
       "Variétés conventionnelles pour trituration et alimentation animale. Protéines ≥ 36 %, impuretés ≤ 2 %.",
     spec: "PROT. ≥ 36 % · IMPUR. ≤ 2 %",
-    image: "/images/produits/locaux/soja.png",
+    image: "/images/produits/locaux/soja.webp",
     alt: "Grains de soja en tas dans une caisse de tri",
   },
 
@@ -189,61 +189,61 @@ export const PRODUITS_LOCAUX: Produit[] = [
   {
     id: "mais",
     nom: "Maïs",
-    image: "/images/produits/locaux/mais.png",
+    image: "/images/produits/locaux/mais.webp",
     alt: "Grains de maïs jaune séchés versés dans un panier tressé",
   },
   {
     id: "riz",
     nom: "Riz local",
-    image: "/images/produits/locaux/riz.png",
+    image: "/images/produits/locaux/riz.webp",
     alt: "Riz blanc long grain versé dans un panier tressé",
   },
   {
     id: "manioc",
     nom: "Manioc",
-    image: "/images/produits/locaux/manioc.png",
+    image: "/images/produits/locaux/manioc.webp",
     alt: "Racines de manioc fraîchement récoltées empilées dans une caisse",
   },
   {
     id: "mil-rouge",
     nom: "Mil rouge",
-    image: "/images/produits/locaux/mil-rouge.png",
+    image: "/images/produits/locaux/mil-rouge.webp",
     alt: "Mil rouge dans une calebasse devant des épis de mil séchés",
   },
   {
     id: "farine",
     nom: "Farine",
-    image: "/images/produits/locaux/farine.png",
+    image: "/images/produits/locaux/farine.webp",
     alt: "Farine blanche en sac de jute ouvert avec une pelle en bois",
   },
   {
     id: "tourteau-arachide",
     nom: "Tourteau d'arachide",
-    image: "/images/produits/locaux/tourteau-arachide.png",
+    image: "/images/produits/locaux/tourteau-arachide.webp",
     alt: "Tourteau d'arachide en granulés ocre sortant d'un sac de jute",
   },
   {
     id: "banane-plantain",
     nom: "Banane plantain",
-    image: "/images/produits/locaux/banane-plantain.png",
+    image: "/images/produits/locaux/banane-plantain.webp",
     alt: "Régime de bananes plantains vertes posé sur des feuilles de bananier",
   },
   {
     id: "fruits-legumes",
     nom: "Fruits et légumes",
-    image: "/images/produits/locaux/fruits-legumes.png",
+    image: "/images/produits/locaux/fruits-legumes.webp",
     alt: "Étal de fruits et légumes frais dans des paniers tressés",
   },
   {
     id: "elevage",
     nom: "Produits d'élevage",
-    image: "/images/produits/locaux/elevage.png",
+    image: "/images/produits/locaux/elevage.webp",
     alt: "Troupeau de zébus et de chèvres dans un enclos au coucher du soleil",
   },
   {
     id: "intrants-agricoles",
     nom: "Intrants agricoles",
-    image: "/images/produits/locaux/intrants-agricoles.png",
+    image: "/images/produits/locaux/intrants-agricoles.webp",
     alt: "Sacs d'engrais et de semences empilés sur palettes dans un entrepôt",
   },
 ];
@@ -256,43 +256,43 @@ export const PRODUITS_IMPORTES: Produit[] = [
   {
     id: "riz-importe",
     nom: "Riz",
-    image: "/images/produits/importes/riz.png",
+    image: "/images/produits/importes/riz.webp",
     alt: "Sacs de riz empilés sur palettes dans un entrepôt",
   },
   {
     id: "mais-importe",
     nom: "Maïs",
-    image: "/images/produits/importes/mais.png",
+    image: "/images/produits/importes/mais.webp",
     alt: "Maïs jaune en vrac et sac ouvert dans un entrepôt",
   },
   {
     id: "farine-importee",
     nom: "Farine",
-    image: "/images/produits/importes/farine.png",
+    image: "/images/produits/importes/farine.webp",
     alt: "Sacs de farine blanche palettisés dans un entrepôt",
   },
   {
     id: "pates-alimentaires",
     nom: "Pâtes alimentaires",
-    image: "/images/produits/importes/pates-alimentaires.png",
+    image: "/images/produits/importes/pates-alimentaires.webp",
     alt: "Pâtes sèches longues et courtes présentées dans des caisses en bois",
   },
   {
     id: "sucre",
     nom: "Sucre",
-    image: "/images/produits/importes/sucre.png",
+    image: "/images/produits/importes/sucre.webp",
     alt: "Sucre blanc cristallisé s'écoulant d'un sac ouvert",
   },
   {
     id: "sardines",
     nom: "Sardines",
-    image: "/images/produits/importes/sardines.png",
+    image: "/images/produits/importes/sardines.webp",
     alt: "Boîtes de conserve de sardines empilées dans un entrepôt",
   },
   {
     id: "tourteau-soja",
     nom: "Tourteau de soja",
-    image: "/images/produits/importes/tourteau-soja.png",
+    image: "/images/produits/importes/tourteau-soja.webp",
     alt: "Tourteau de soja en granulés clairs sortant d'un sac de vrac",
   },
 ];
@@ -323,35 +323,35 @@ export const FOURNITURES: Fourniture[] = [
     id: "cahiers",
     nom: "Cahiers et papeterie scolaire",
     exemples: "Cahiers, blocs, carnets",
-    image: "/images/produits/bureau/cahiers.png",
+    image: "/images/produits/bureau/cahiers.webp",
     alt: "Piles de cahiers à couverture kraft sur un comptoir en bois, un cahier ouvert sur des pages lignées",
   },
   {
     id: "ramettes",
     nom: "Ramettes de papier",
     exemples: "Papier A4, papier listing",
-    image: "/images/produits/bureau/ramettes.png",
+    image: "/images/produits/bureau/ramettes.webp",
     alt: "Ramettes de papier blanc empilées sur une étagère en bois",
   },
   {
     id: "ecriture",
     nom: "Matériel d'écriture",
     exemples: "Stylos, crayons, marqueurs",
-    image: "/images/produits/bureau/ecriture.png",
+    image: "/images/produits/bureau/ecriture.webp",
     alt: "Stylos, crayons et marqueurs rangés dans un panier tressé sur un plan de travail en bois",
   },
   {
     id: "classement",
     nom: "Articles de classement",
     exemples: "Chemises, classeurs, boîtes d'archives",
-    image: "/images/produits/bureau/classement.png",
+    image: "/images/produits/bureau/classement.webp",
     alt: "Chemises cartonnées, classeurs et boîtes d'archives kraft rangés sur une étagère",
   },
   {
     id: "petit-materiel",
     nom: "Petit matériel de bureau",
     exemples: "Agrafeuses, perforateurs, ciseaux",
-    image: "/images/produits/bureau/petit-materiel.png",
+    image: "/images/produits/bureau/petit-materiel.webp",
     alt: "Agrafeuse, perforateur, ciseaux et trombones disposés sur un bureau en bois",
   },
 ];

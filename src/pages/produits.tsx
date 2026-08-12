@@ -29,7 +29,7 @@ export default function PageProduits() {
           property="og:description"
           content="Produits locaux du terroir camerounais et denrées importées. Spécifications et échantillons sur demande."
         />
-        <meta property="og:image" content="/images/produits/locaux/cacao.png" />
+        <meta property="og:image" content="/images/produits/locaux/cacao.webp" />
         <meta property="og:locale" content="fr_FR" />
       </Head>
 
@@ -40,7 +40,7 @@ export default function PageProduits() {
             l'accueil, la grille produit doit arriver vite. */}
         <section className="hero hero-page">
           <Image
-            src="/images/produits/locaux/cacao.png"
+            src="/images/produits/locaux/cacao.webp"
             alt="Cabosses de cacao ouvertes sur des feuilles de bananier"
             fill
             priority

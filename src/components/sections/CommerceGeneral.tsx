@@ -32,7 +32,7 @@ export function CommerceGeneral() {
               un défilement horizontal. */}
           <div className="bureau-media">
             <Image
-              src="/images/produits/bureau/rayon.png"
+              src="/images/produits/bureau/rayon.webp"
               alt="Rayon de fournitures de bureau : étagères en bois garnies de cahiers, de ramettes et de boîtes d'archives"
               fill
               sizes="(max-width: 900px) 100vw, 570px"

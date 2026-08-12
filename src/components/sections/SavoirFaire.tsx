@@ -11,7 +11,7 @@ export function SavoirFaire() {
       >
         <div className="savoir-media">
           <Image
-            src="/images/accueil/savoir-faire.png"
+            src="/images/accueil/savoir-faire.webp"
             alt="Entrepôt de tri SICCAM : pesée et calibrage des sacs"
             fill
             sizes="(max-width: 900px) 100vw, 570px"

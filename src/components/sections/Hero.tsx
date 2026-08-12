@@ -6,7 +6,7 @@ export function Hero() {
   return (
     <section id="hero" className="hero">
       <Image
-        src="/images/accueil/hero.png"
+        src="/images/accueil/hero.webp"
         alt="Plantation de cacao au Sud-Cameroun, cabosses mûres sous le feuillage"
         fill
         priority
